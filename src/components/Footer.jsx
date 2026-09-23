@@ -6,6 +6,13 @@ import logoImg from '../assets/logo.png'
 import { DEFAULT_OFFERINGS } from '../data/defaultOfferings'
 import { getSetting } from '../services/settingsService'
 
+const PHONE_NUMBERS = [
+  { number: "9994441363", display: "+91 99944 41363" },
+  { number: "9043700776", display: "+91 90437 00776" },
+  { number: "7200118072", display: "+91 72001 18072" }
+]
+const EMAIL = "royalhoofhorseriddingacademy@gmail.com"
+
 const FacebookIcon = ({ size = 18, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -86,10 +93,31 @@ export default function Footer() {
                   <p>Aspen Greens, Nallambakkam, Chennai, Tamil Nadu</p>
                 </div>
               </div>
+              
+              {/* Phone Numbers */}
+              {PHONE_NUMBERS.map((phone, index) => (
+                <div key={phone.number} className="flex items-center gap-3">
+                  <Phone size={16} className="text-[#C5963A]" />
+                  <a 
+                    href={`tel:+91${phone.number}`}
+                    className="font-medium text-[#F5EBD8] hover:text-[#C5963A] transition-colors duration-200"
+                  >
+                    {phone.display}
+                  </a>
+                </div>
+              ))}
+              
+              {/* Email */}
               <div className="flex items-center gap-3">
-                <Phone size={16} className="text-[#C5963A]" />
-                <span className="font-medium text-[#F5EBD8]">9043700776</span>
+                <Globe size={16} className="text-[#C5963A]" />
+                <a 
+                  href={`mailto:${EMAIL}`}
+                  className="font-medium text-[#F5EBD8] hover:text-[#C5963A] transition-colors duration-200"
+                >
+                  {EMAIL}
+                </a>
               </div>
+              
               <div className="flex items-center gap-3">
                 <Globe size={16} className="text-[#C5963A]" />
                 <span className="font-medium text-[#F5EBD8]">www.royalhoof.com</span>
@@ -179,9 +207,24 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-4 text-center md:text-left">
             <span className="flex items-center gap-1.5"><MapPin size={13} className="text-[#C5963A]" /> NALLAMBAKKAM, CHENNAI</span>
             <span className="text-[#C5963A]">|</span>
-            <span className="flex items-center gap-1.5"><Globe size={13} className="text-[#C5963A]" /> www.royalhoof.com</span>
+            <span className="flex items-center gap-1.5"><Globe size={13} className="text-[#C5963A]" /> {EMAIL}</span>
             <span className="text-[#C5963A]">|</span>
-            <span className="flex items-center gap-1.5"><Phone size={13} className="text-[#C5963A]" /> 9043700776</span>
+            <div className="flex items-center gap-2">
+              <Phone size={13} className="text-[#C5963A]" />
+              <div className="flex flex-wrap gap-2">
+                {PHONE_NUMBERS.map((phone, index) => (
+                  <span key={phone.number}>
+                    <a 
+                      href={`tel:+91${phone.number}`}
+                      className="hover:text-[#C5963A] transition-colors duration-200"
+                    >
+                      {phone.number}
+                    </a>
+                    {index < PHONE_NUMBERS.length - 1 && <span className="text-[#C5963A] ml-2">•</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="flex items-center gap-4">

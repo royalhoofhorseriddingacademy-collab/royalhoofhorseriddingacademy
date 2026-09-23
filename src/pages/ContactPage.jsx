@@ -6,6 +6,12 @@ import { supabase } from '../lib/supabase'
 import { isValidPhone, isValidEmail, sanitizePhone } from '../utils/validation'
 
 const WHATSAPP_NUMBER = "919043700776"
+const PHONE_NUMBERS = [
+  { number: "9994441363", display: "+91 99944 41363" },
+  { number: "9043700776", display: "+91 90437 00776" },
+  { number: "7200118072", display: "+91 72001 18072" }
+]
+const EMAIL = "royalhoofhorseriddingacademy@gmail.com"
 
 const FacebookIcon = ({ size = 18, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -81,17 +87,17 @@ export default function ContactPage() {
   }
 
   const contactInfo = [
-    {
+    ...PHONE_NUMBERS.map((phone, index) => ({
       icon: <Phone size={20} />,
-      label: 'Phone / WhatsApp',
-      value: '+91 90437 00776',
-      href: 'tel:+919043700776',
-    },
+      label: index === 0 ? 'Phone Numbers' : '',
+      value: phone.display,
+      href: `tel:+91${phone.number}`,
+    })),
     {
       icon: <Mail size={20} />,
-      label: 'Website',
-      value: 'www.royalhoof.com',
-      href: 'https://www.royalhoof.com',
+      label: 'Email Address',
+      value: EMAIL,
+      href: `mailto:${EMAIL}`,
     },
     {
       icon: <Clock size={20} />,
@@ -277,6 +283,96 @@ export default function ContactPage() {
                 }}>
                   Stay connected with Royal Hoof for updates, events, and riding highlights.
                 </p>
+                
+                {/* Social Media Cards with QR Codes */}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px", marginBottom: "20px" }}>
+                  {/* Facebook Card */}
+                  <div className="equestrian-card rounded-sm p-4 text-center" style={{ transform: "none" }}>
+                    <div style={{ marginBottom: "12px" }}>
+                      <img 
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent('https://facebook.com/royalhoofhorseriddingacademy')}`}
+                        alt="Facebook QR Code"
+                        style={{ width: "80px", height: "80px", margin: "0 auto", borderRadius: "8px" }}
+                      />
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", marginBottom: "8px" }}>
+                      <FacebookIcon size={20} className="text-[#C5963A]" />
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#292725" }}>
+                        Facebook
+                      </span>
+                    </div>
+                    <a
+                      href="https://facebook.com/royalhoofhorseriddingacademy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-block",
+                        fontSize: "0.75rem",
+                        color: "#C5963A",
+                        textDecoration: "none",
+                        fontFamily: "'Inter', sans-serif",
+                        padding: "4px 8px",
+                        borderRadius: "4px",
+                        border: "1px solid #C5963A",
+                        transition: "all 0.2s",
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.background = "#C5963A";
+                        e.currentTarget.style.color = "#fff";
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.background = "transparent";
+                        e.currentTarget.style.color = "#C5963A";
+                      }}
+                    >
+                      Visit Page
+                    </a>
+                  </div>
+
+                  {/* Instagram Card */}
+                  <div className="equestrian-card rounded-sm p-4 text-center" style={{ transform: "none" }}>
+                    <div style={{ marginBottom: "12px" }}>
+                      <img 
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent('https://www.instagram.com/royal_hoof_horse_ridding?stkn=eWwydWVidzcxMjRq')}`}
+                        alt="Instagram QR Code"
+                        style={{ width: "80px", height: "80px", margin: "0 auto", borderRadius: "8px" }}
+                      />
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", marginBottom: "8px" }}>
+                      <InstagramIcon size={20} className="text-[#C5963A]" />
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#292725" }}>
+                        Instagram
+                      </span>
+                    </div>
+                    <a
+                      href="https://www.instagram.com/royal_hoof_horse_ridding?stkn=eWwydWVidzcxMjRq"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-block",
+                        fontSize: "0.75rem",
+                        color: "#C5963A",
+                        textDecoration: "none",
+                        fontFamily: "'Inter', sans-serif",
+                        padding: "4px 8px",
+                        borderRadius: "4px",
+                        border: "1px solid #C5963A",
+                        transition: "all 0.2s",
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.background = "#C5963A";
+                        e.currentTarget.style.color = "#fff";
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.background = "transparent";
+                        e.currentTarget.style.color = "#C5963A";
+                      }}
+                    >
+                      Visit Page
+                    </a>
+                  </div>
+                </div>
+
                 <div className="flex flex-wrap items-center gap-3">
                   <a
                     href="https://facebook.com/royalhoofhorseriddingacademy"
